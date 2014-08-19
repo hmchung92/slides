@@ -7,14 +7,40 @@
     <meta name="author" content="Rouben Meschian">
     <title>AngularJS</title>
 
+	<link rel="stylesheet" href="../codemirror/lib/codemirror.css">
+    
+    <link rel="stylesheet" href="../codemirror/theme/neat.css">
+    <link rel="stylesheet" href="../codemirror/theme/elegant.css">
+    <link rel="stylesheet" href="../codemirror/theme/erlang-dark.css">
+    <link rel="stylesheet" href="../codemirror/theme/night.css">
+    <link rel="stylesheet" href="../codemirror/theme/monokai.css">
+    <link rel="stylesheet" href="../codemirror/theme/cobalt.css">
+    <link rel="stylesheet" href="../codemirror/theme/eclipse.css">
+    <link rel="stylesheet" href="../codemirror/theme/rubyblue.css">
+    <link rel="stylesheet" href="../codemirror/theme/lesser-dark.css">
+    <link rel="stylesheet" href="../codemirror/theme/xq-dark.css">
+    <link rel="stylesheet" href="../codemirror/theme/ambiance.css">
+    <link rel="stylesheet" href="../codemirror/theme/blackboard.css">
+    <link rel="stylesheet" href="../codemirror/theme/vibrant-ink.css">
+    <!--<link rel="stylesheet" href="../codemirror/doc/docs.css">-->
+
+    <style type="text/css">
+      .CodeMirror {border: 1px solid black; font-size:15px}
+    </style>
+	
     <link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="../js/lib/bootstrap.min.js"></script>
+	
 </head>
 <body class="deck-container">
 
     <div class="navButtonBar">
         <a href="javascript:void(0)" class="backBtn btn-small btn-primary" title="Back"><i class="icon-arrow-left icon-white"></i></a>
         <a href="javascript:void(0)" class="forwardBtn btn-small btn-primary" title="Forward"><i class="icon-arrow-right icon-white"></i></a>
-        <a href="../index.html" title="Home" class=" btn-small btn-primary"><i class="icon-home icon-white"></i></a>
+        <a href="
+		" title="Home" class=" btn-small btn-primary"><i class="icon-home icon-white"></i></a>
     </div>
 
 
@@ -22,18 +48,22 @@
 
 	<section class="slide">
 		<div class='centerMsg'>
-			<h1>Angular<span style='color: red'>JS</span></h1>
-            <img src="../img/angular.jpg">
+			<!--<h1>ANGULAR<span style='color: red'>JS</span></h1>-->
+            <img src="../img/AngularJS-large.png">
+			<h1>HTML enhanced for web apps</h1>
 		</div>
 	</section>
 
 	<section class="slide">
-		<ul class='js_fact'>
+	<div class="panel panel-success">
+			<ul class='js_fact'>
 			<li>Rich client-side interactivity without messy event handlers</li>
 			<li>MVVM pattern - object-oriented JS and declarative bindings</li>
 			<li>IE6+ FF2+ Chrome Safari Opera ...</li>
 			<li>MIT License</li>
 		</ul>
+	</div>
+
 	</section>
 
 
@@ -48,16 +78,16 @@
 
 
     <section class="slide">
-        <h2>Data-binding programmatically</h2>
+        <h1>Data-binding programmatically</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
-                <textarea>
+                <textarea id="code" name="code">
 <input type="text" />
-<h2></h2>
+<h1></h1>
 <script>
     var input = $('input');
     var updateLbl = function() {
-        $('h2').text(input.val());
+        $('h1').text(input.val());
     }
     $('input').on('change', updateLbl).val("Rouben");
     updateLbl();
@@ -72,17 +102,17 @@
 
 
 	<section class="slide">
-		<h2>Basic binding</h2>
+		<h1>Basic binding</h1>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
 <div data-ng-app>
 
   <input type="text" data-ng-model="yourName" />
-  <h2 data-ng-bind="yourName"></h2>
+  <h1 data-ng-bind="yourName"></h1>
 
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 				</textarea>
 			</div>
 			<hr />
@@ -93,7 +123,14 @@
 
 
 	<section class="slide">
-		<h2>Explicit binding</h2>
+		<h1>Explicit binding (AngularJS Expressions)</h1>
+		<ul>
+			<li>AngularJS expressions are written inside double braces: <b>{{ expression }}</b>.</li>
+			<li>AngularJS expressions binds data to HTML the same way as the <b>ng-bind</b> directive.</li>
+			<li>AngularJS will "output" data exactly where the expression is written.</li>
+			<li><b>AngularJS expressions</b> are much like JavaScript expressions: They can contain literals, operators, and variables.</li>
+		</ul>
+
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
@@ -101,11 +138,11 @@
 
   <input type="text" data-ng-model="yourName" />
 
-  <h2>{{yourName}}</h2>
+  <h1>{{yourName}}</h1>
 
 </div>
 
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
 	angular.bootstrap($('#main'));
 </script>
@@ -120,10 +157,20 @@
 
 
 	<section class="slide">
-		<h2>Controller</h2>
+		<h1>Controller - Multiple controllers - Nested Controller</h1>
+		<ul>
+			<li>AngularJS applications are controlled by controllers.</li>
+			<li>The ng-controller directive defines the application controller.</li>
+			<li>A controller is a JavaScript Object, created by a standard JavaScript object constructor.</li>
+			<li>The $scope of the controller is the application /the HTML element) it is referred from.</li>
+		</ul>
+		
+		<p>In AngularJS, everything has an associated scope. Scopes are organized in a hierarchy. There is a $rootScope object, the parent of all the scopes of the AngularJS application, and there are scopes created by some directives.</p>
+		<p>The $scope argument in the simpleController function is the scope associated to our new controller. The scope is created for us by AngularJS and made available to our controller function through Dependency Injection (DI).<p>
+		<p>We can define <b>multiple controllers</b> in the same HTML template and each one manages its own $scope object.</p>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
-				<textarea>
+				<textarea id="code" name="code">
 <div data-ng-app>
 
 	<div data-ng-controller="MyCtrl">
@@ -137,17 +184,20 @@
     	};
   	</script>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
+    
 				</textarea>
 			</div>
 			<hr />
+
 			<div class="codeEditor_target"></div>
 		</div>
+		
 	</section>
 
 
 	<section class="slide">
-		<h2>Add custom listeners</h2>
+		<h1>Add custom listeners</h1>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
@@ -166,7 +216,7 @@
     	}
   	</script>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 				</textarea>
 			</div>
 			<hr />
@@ -177,7 +227,10 @@
 
 
 	<section class="slide">
-		<h2>Binding collections</h2>
+		<h1>Binding collections</h1>
+		<ul>
+			<li>The ng-repeat directive clones HTML elements once for each item in a collection (in an array).</li>
+		</ul>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
@@ -192,7 +245,7 @@
   	</ul>
 
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 
 <script>
   function MyCtrl($scope) {
@@ -206,10 +259,173 @@
 		</div>
 	</section>
 
+	<section class="slide">
+		<h1>AngularJS Filters</h1>
+		<table class="table">
+<tbody><tr>
+	<th style="width:20%">Filter</th>
+	<th>Description</th>
+</tr>
+<tr>
+	<td>currency</td>
+	<td>Format a number to a currency format.</td>
+</tr>
+<tr>
+	<td>filter</td>
+	<td>Select a subset of items from an array.</td>
+</tr>
+<tr>
+	<td>lowercase</td>
+	<td>Format a string to lower case.</td>
+</tr>
+<tr>
+	<td>orderBy</td>
+	<td>Orders an array by an expression.</td>
+</tr>
+<tr>
+	<td>uppercase</td>
+	<td>Format a string to upper case.</td>
+</tr>
+</tbody></table>
+		<div class="codeEditor">
+			<div class='codeEditor_editor'>
+				<textarea>
+<div data-ng-app>
 
+	<div ng-controller="MyCtrl">
+		<!--Filtering Input-->
+		<h3>Filtering input:<input type="text" ng-model="name"></h3>
+		<ul>
+		  <li ng-repeat="x in names | filter:name | orderBy:'country'">
+			<h3>{{ (x.name | uppercase) + ', ' + x.country + ', ' + (x.price | currency) }}</h3>
+		  </li>
+		</ul>
+	</div>
+	
+  	<script>
+    	function MyCtrl($scope) {
+      		$scope.names = [
+			{name:'Jani',country:'Norway', price: 111999},
+			{name:'Hege',country:'Sweden', price: 111},
+			{name:'Kai', country:'Denmark', price: 787878}
+    ];
+    	}
+		
+  	</script>
+</div>
+<script src="../js/lib/angular.min.js"></script>
+				</textarea>
+			</div>
+			<hr />
+			<div class="codeEditor_target"></div>
+		</div>
+	</section>
 
 	<section class="slide">
-		<h2>Load and Save data</h2>
+		<h1>AngularJS HttpRequest</h1>
+		
+		<table class="table table-striped">
+<tbody><tr>
+	<th style="width:20%">HttpRequest</th>
+	<th>Description</th>
+</tr>
+<tr>
+	<td>AngularJS $http</td>
+	<td>is a service for reading data from web servers.</td>
+</tr>
+<tr>
+	<td>$http.get(url)</td>
+	<td>is the function to use for reading server data.</td>
+</tr>
+<tr>
+	<td>$http.post(url)</td>
+	<td>is the function to use for posting server data.</td>
+</tr>
+</tbody></table>
+		
+		<div class="codeEditor">
+			<div class='codeEditor_editor'>
+				<textarea>
+<div data-ng-app>
+
+	<div ng-controller="MyCtrl">
+		<!--Filtering Input-->
+		<ul>
+		  <li ng-repeat="x in names">
+			{{ x.Name + ', ' + x.Country }}
+		  </li>
+		</ul>
+	</div>
+	
+  	<script>
+    	function MyCtrl($scope,$http) {
+			var site = "http://www.w3schools.com";
+			var page = "/website/Customers_JSON.php";
+			$http.get(site + page)
+			.success(function(response) {$scope.names = response;});
+		}
+		
+  	</script>
+</div>
+<script src="../js/lib/angular.min.js"></script>
+				</textarea>
+			</div>
+			<hr />
+			<div class="codeEditor_target"></div>
+		</div>
+	</section>
+
+	<section class="slide">
+		<h1>AngularJS HTML DOM</h1>
+		<table class="table table-striped">
+<tbody><tr>
+	<th style="width:20%">HTML DOM</th>
+	<th>Description</th>
+</tr>
+<tr>
+	<td>ng-disabled directive</td>
+	<td>binds the application data "mySwitch" to the HTML disabled attribute.</td>
+</tr>
+<tr>
+	<td>ng-show directive</td>
+	<td>hides or shows an HTML element.</td>
+</tr>
+<tr>
+	<td>ng-model directive</td>
+	<td>binds "mySwitch" to the content (value) of the HTML input checkbox element.</td>
+</tr>
+</tbody></table>
+		<div class="codeEditor">
+			<div class='codeEditor_editor'>
+				<textarea>
+<div data-ng-app>
+
+	<p>
+		<button ng-disabled="mySwitch">Click Me!</button>
+	</p>
+
+	<p>
+		<input type="checkbox" ng-model="mySwitch">Button
+	</p>
+	
+	<p>
+		{{ mySwitch }}
+	</p>
+	
+	<p ng-show="true">I am visible.</p>
+
+	<p ng-show="false">I am not visible.</p>
+</div>
+<script src="../js/lib/angular.min.js"></script>
+				</textarea>
+			</div>
+			<hr />
+			<div class="codeEditor_target"></div>
+		</div>
+	</section>
+	
+	<section class="slide">
+		<h1>Load and Save data</h1>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
@@ -244,7 +460,7 @@
     </div>
 
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 
 <script>
     // ============================================
@@ -301,14 +517,14 @@
 
 
 	<section class="slide">
-		<h2>Binding lists</h2>
+		<h1>Binding lists</h1>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
 <div data-ng-app>
     <div data-ng-controller="Todos">
 
-        <h2>TODOS ( {{numDone()}} / {{todos.length}} )</h2>
+        <h1>TODOS ( {{numDone()}} / {{todos.length}} )</h1>
 
         <ul>
             <li data-ng-repeat="todo in todos">
@@ -345,7 +561,7 @@
         }
     </script>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 				</textarea>
 			</div>
 			<hr />
@@ -357,14 +573,14 @@
 
 
     <section class="slide">
-        <h2>Binding lists + Validation</h2>
+        <h1>Binding lists + Validation</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
                 <textarea>
 <div data-ng-app>
     <div data-ng-controller="Todos">
 
-        <h2>TODOS ( {{numDone()}} / {{todos.length}} )</h2>
+        <h1>TODOS ( {{numDone()}} / {{todos.length}} )</h1>
 
         <ul>
             <li data-ng-repeat="todo in todos">
@@ -417,7 +633,7 @@
         }
     </script>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
                 </textarea>
             </div>
             <hr />
@@ -427,7 +643,7 @@
 
 
 	<section class="slide">
-		<h2>Avoid global variables</h2>
+		<h1>Avoid global variables</h1>
 		<div class="codeEditor">
 			<div class='codeEditor_editor'>
 				<textarea>
@@ -437,7 +653,7 @@
       {{name}}
   	</div>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
 (function() {
     var Demo = angular.module( "Demo", [] );
@@ -467,7 +683,7 @@
 
 
     <section class="slide">
-        <h2>Inject values</h2>
+        <h1>Inject values</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
                 <textarea>
@@ -477,7 +693,7 @@
         {{name}}
     </div>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     (function() {
         var Demo = angular.module( "Demo", [] );
@@ -497,7 +713,7 @@
 
 
     <section class="slide">
-        <h2>Inject Factories (Services)</h2>
+        <h1>Inject Factories (Services)</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
                 <textarea>
@@ -507,7 +723,7 @@
         {{revName()}}
     </div>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     (function() {
         var Demo = angular.module( "Demo", [] );
@@ -551,7 +767,7 @@
 
 
     <section class="slide">
-        <h2>Directive Maps Demo</h2>
+        <h1>Directive Maps Demo</h1>
         <p>Based on the <a href="http://wbyoko.co/angularjs-google-maps-components/" target="_blank">maps directive</a></p>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
@@ -571,7 +787,7 @@
 </div>
 
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     var myApp = angular.module( "myApp", [] );
 
@@ -651,7 +867,7 @@
 
 
     <section class="slide">
-        <h2>Directive Video Demo</h2>
+        <h1>Directive Video Demo</h1>
         <p>Based on the <a href="https://github.com/jonashartmann/webcam-directive" target="_blank">webcam directive</a></p>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
@@ -659,7 +875,7 @@
 <p>This is going to be sweet!</p>
 <webcam></webcam>
 
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     (function() {
 
@@ -738,7 +954,7 @@
 
 
     <section class="slide">
-        <h2>Directive</h2>
+        <h1>Directive</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
                 <textarea>
@@ -749,7 +965,7 @@
         {{revName()}}
     </div>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     (function() {
         var Demo = angular.module( "Demo", [] );
@@ -800,7 +1016,7 @@
 
 
     <section class="slide">
-        <h2>Directive - with its own scope</h2>
+        <h1>Directive - with its own scope</h1>
         <div class="codeEditor">
             <div class='codeEditor_editor'>
                 <textarea>
@@ -811,7 +1027,7 @@
         {{revName()}}
     </div>
 </div>
-<script src="../js/lib/angular.js"></script>
+<script src="../js/lib/angular.min.js"></script>
 <script>
     (function() {
         var Demo = angular.module( "Demo", [] );
@@ -877,7 +1093,21 @@
     </section>
 
 	<!-- End slides. -->
-
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true
+  });
+  var input = document.getElementById("select");
+  function selectTheme() {
+    var theme = input.options[input.selectedIndex].innerHTML;
+    editor.setOption("theme", theme);
+  }
+  var choice = document.location.search && document.location.search.slice(1);
+  if (choice) {
+    input.value = choice;
+    editor.setOption("theme", choice);
+  }
+</script>
 
 	<script data-main="../js/main" src="../js/lib/require/require.js"></script>
 
